@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pycollage-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pycollage-{{ version }}.tar.gz
   sha256: d80f2b638626e9d419862aa3ede3153ecbbb616e786a678c5cb07533bf5a3600
 
 build:
@@ -14,17 +14,17 @@ build:
   entry_points:
     - "pycollage = pycollage.processing:cli"
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
   run:
     - python-annoy
     - click
     - pillow
-    - python >=3.8
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/kklein/pycollage
